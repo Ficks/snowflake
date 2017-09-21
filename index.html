@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_411392_90ry4hinw9bv5cdi.css">
+    <title>Document</title>
+    <style>
+        .iconfont {
+            position: absolute;
+            top: -50px;
+            color: #fff;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            background: url(./timg.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <script>
+        function xuehua(size, x, sty) {
+            this.size = size > 12 ? size : 12;
+            this.x = x;
+            this.sty = sty;
+        }
+        xuehua.prototype.h = window.innerHeight;
+        xuehua.prototype.getColor = function () {
+            return "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+        }
+        xuehua.prototype.commcon = function () {
+            var el = document.getElementById("xh");
+            var o = document.createElement("div")
+            o.className = 'iconfont ' + this.sty;
+            el.appendChild(o);
+
+            o.style.fontSize = this.size + "px";
+            o.style.left = this.x + 'px';
+            var timer = null;
+            clearInterval(timer);
+            timer = setInterval(function () {
+                if (o.offsetTop < this.h - 50) {
+                    o.style.top = o.offsetTop + 2 + 'px';
+                    // o.style.color = this.getColor();
+                } else {
+                    el.removeChild(o);
+                    clearInterval(timer);
+                }
+            }.bind(this), 30)
+        }
+    </script>
+</head>
+
+<body>
+    <div id="xh"></div>
+    <script>
+        var styleArr = ['icon-xuehua3', 'icon-tubiaoxuehua', 'icon-icon-weather-snowflake', 'icon-weibiaoti-',
+            'icon-icon-test', 'icon-icon5-copy', 'icon-icon16', 'icon-icon15', 'icon-1', 'icon-mianbanxuehua',
+            'icon-xuehua2', 'icon-xuehua1', 'icon-xuehua', 'icon-xueliechetubiaoxueliechexuehua0132px1',
+            'icon-xueliechetubiao09', 'icon-xueliechetubiao08', 'icon-meiguihua3', 'icon-meiguihua2',
+            'icon-meiguihua1', 'icon-meiguihua'
+        ]
+
+        setInterval(function () {
+            var styleR = styleArr[parseInt(Math.random() * styleArr.length)]
+            var x = Math.random() * (window.innerWidth - 50);
+            var size = parseInt(Math.random() * 40);
+            var o = new xuehua(size, x, styleR);
+            o.commcon();
+        }, 300)
+    </script>
+</body>
+
+</html>
